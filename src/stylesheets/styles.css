@@ -30,3 +30,19 @@
     transform: rotate(360deg);
   }
 }
+
+.App-icon {
+  height: 40vmin;
+}
+
+nav.menu {
+  top: 0;
+  left: 0;
+  width: calc(100% - 1em);
+  font-size: 2em;
+  padding: .5em;
+  display: flex;
+  justify-content: space-around;
+}
+
+
