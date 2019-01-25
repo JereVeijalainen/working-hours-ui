@@ -45,4 +45,39 @@ nav.menu {
   justify-content: space-around;
 }
 
+form.add-form {
+
+	font-family: Verdana, sans-serif;
+  width: 70%;
+  margin-left: 15%;
+  justify-content: space-around;
+  align-items: stretch;
+	height: calc(100% - 12em);
+	
+}
+
+label {
+	font-size: 1em;
+	text-shadow: 3px 3px 10px #d3d5e3;
+	height: 10px;
+	font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+	font-size: 1em;
+	padding: .25em;
+	border-radius: .2em;
+	outline: none;
+}
+
+textarea {
+	font-size: 1em;
+	padding: .25em;
+	border-radius: .2em;
+	width: 20em;
+	height: 5em;
+}
+
 

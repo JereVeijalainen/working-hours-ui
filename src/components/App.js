@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { FaBusinessTime } from 'react-icons/fa'
-import WorkTimeList from './WorkTimeList';
-import AddWorkTimeForm from './AddWorkTimeRow';
+import WorkingTimeList from './WorkingTimeList';
+import AddWorkingTimeForm from './AddWorkingTimeForm';
 
-const worksTimes = [
+const workingTimes = [
 	{
 		project: 'Rio Working Hours',
 		worker: 'Jere Veijalainen',
@@ -21,20 +21,29 @@ const worksTimes = [
 ];
 
 class App extends Component {
+
+	state = {
+		allWorkingTimes: workingTimes
+	};
+
+	addWorkingTime = newWorkingTime => {
+		this.setState({
+			allWorkingTimes: [...this.state.allWorkingTimes, newWorkingTime]
+		});
+	}
+
   render() {
-
 		const location = this.props.location;
-
-		console.log(location.pathname);
-    return (
+		
+		return (
       <div className="App">
         <header>
           <FaBusinessTime/>
 					<h1>Work Timer</h1>
         </header>
 				{location.pathname === '/add' ?
-					<AddWorkTimeForm /> : location.pathname === '/list' ?
-					<WorkTimeList workTimes={worksTimes} />:
+					<AddWorkingTimeForm onNewWorkingTime={this.addWorkingTime} /> : location.pathname === '/list' ?
+					<WorkingTimeList workingTimes={this.state.allWorkingTimes} />:
 					null					
 				}
       </div>

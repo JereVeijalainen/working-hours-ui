@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const WorkTimeRow = ({project, worker, date, hours, description}) => {
+const WorkingTimeRow = ({project, worker, date, hours, description}) => {
 	return (
 		<tr>
 			<td>{project}</td>
@@ -13,7 +13,7 @@ const WorkTimeRow = ({project, worker, date, hours, description}) => {
 	)
 }
 
-WorkTimeRow.propTypes = {
+WorkingTimeRow.propTypes = {
 	project: PropTypes.string,
 	worker: PropTypes.string,
 	date: PropTypes.string,
@@ -21,4 +21,4 @@ WorkTimeRow.propTypes = {
 	description: PropTypes.string
 }
 
-export default WorkTimeRow;
+export default WorkingTimeRow;

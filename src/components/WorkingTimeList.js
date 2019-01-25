@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import WorkTimeRow from './WorkTimeRow';
+import WorkingTimeRow from './WorkingTimeRow';
 
-class WorkTimeList extends Component {
+class WorkingTimeList extends Component {
 	render() {
-		const { workTimes } = this.props;
+		const { workingTimes } = this.props;
 		return (
 			<section>
-				<table>
+				<table className="table-list">
 					<thead>
 						<tr>
 							<th>Project</th>
@@ -17,8 +17,8 @@ class WorkTimeList extends Component {
 						</tr>
 					</thead>
 					<tbody>
-						{workTimes.map((data, i) =>
-							<WorkTimeRow key={i} {...data} />
+						{workingTimes.map((data, i) =>
+							<WorkingTimeRow key={i} {...data} />
 						)}
 					</tbody>
 				</table>
@@ -27,4 +27,4 @@ class WorkTimeList extends Component {
 	}
 }
 
-export default WorkTimeList;
+export default WorkingTimeList;
