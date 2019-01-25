@@ -8,8 +8,9 @@ const AppRouter = () => {
 			<div>
 				<nav className="menu">
 					<Link to="/">Home</Link>
-					<Link to="/list">Working time list</Link>
 					<Link to="/add">Add working time</Link>
+					<Link to="/list">Working time list</Link>
+					<Link to="/summary">Summary</Link>
 				</nav>
 				<Route path="/" component={App} />
 			</div>
