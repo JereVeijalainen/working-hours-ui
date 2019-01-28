@@ -31,7 +31,8 @@ const workingTimes = [
 class App extends Component {
 
 	state = {
-		allWorkingTimes: workingTimes
+		allWorkingTimes: workingTimes,
+		filteredWorkingTimes: workingTimes
 	};
 
 	addWorkingTime = newWorkingTime => {
@@ -45,26 +46,24 @@ class App extends Component {
 		Tehdään oma filterWorkingHours-toiminto, jossa voisi filtteröidä usealla eri tavalla. Esim henkilön, projektin tai molempien mukaan. Tai kuukauden tai vuoden...
 		Se palauttaa arrayna ehtojen mukaiset rivit, joista voi sitten laskea tuntisumman.
 	*/
-
+	
+	// At the moment this is used only in summary component.
 	sumWorkingHours = (filterBy, filterItem) => {
 		const allWorkingTimes = this.state.allWorkingTimes;
 		const filteredWorkingTimes = filterBy === 'worker' ? allWorkingTimes.filter(time => time.worker === filterItem) :
 																 filterBy === 'project' ? allWorkingTimes.filter(time => time.project === filterItem) :
-
-			allWorkingTimes;
-
+		allWorkingTimes;
 		const countedHours = filteredWorkingTimes.map(time => time.hours);
-
 		return countedHours.reduce((accumulator, currentValue) => accumulator + currentValue);
 	}
-
+	
   render() {
 		const location = this.props.location;
 		
 		return (
       <div className="App">
         <header>
-          <FaBusinessTime/>
+          <FaBusinessTime size={50} />
 					<h1>Work Timer</h1>
         </header>
 				{	location.pathname === '/add' ?
