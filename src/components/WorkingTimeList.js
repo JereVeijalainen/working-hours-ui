@@ -9,7 +9,8 @@ class WorkingTimeList extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
 			dropdownOpen: false,
-			filteredWorkingTimes: this.props.workingTimes
+			filteredWorkingTimes: this.props.workingTimes,
+			selectedWorker: ''
     };
   }
 
@@ -21,7 +22,8 @@ class WorkingTimeList extends Component {
 	
 	noWorkerFilter = () => {
 		this.setState({
-			filteredWorkingTimes: this.props.workingTimes
+			filteredWorkingTimes: this.props.workingTimes,
+			selectedWorker: ''
 		}); 
 	}
 	
@@ -29,7 +31,8 @@ class WorkingTimeList extends Component {
 		const filteredRows = this.props.workingTimes.filter(time => time.worker === worker);
 
 		this.setState({
-			filteredWorkingTimes: filteredRows
+			filteredWorkingTimes: filteredRows,
+			selectedWorker: worker
 		}); 
 	}
 
@@ -47,7 +50,7 @@ class WorkingTimeList extends Component {
 				<section>
 					<ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
 						<DropdownToggle caret>
-							Worker
+							{this.state.selectedWorker ? this.state.selectedWorker : 'Worker'}
 						</DropdownToggle>
 						<DropdownMenu>
 						<DropdownItem key={0} onClick={() => this.noWorkerFilter()}>All</DropdownItem>
