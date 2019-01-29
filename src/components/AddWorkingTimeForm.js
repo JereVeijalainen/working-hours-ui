@@ -1,16 +1,6 @@
 import React, { Component } from 'react';
 
-const projects = [
-	'Rio Working Hours',
-	'Test Project'
-];
 
-const workers = [
-	{ firstName: 'Jere', lastName: 'Veijalainen' },
-	{ firstName: 'Mikko', lastName: 'Mallikas' },
-	{ firstName: 'Maija', lastName: 'Meikäläinen' },
-	{ firstName: 'Börje', lastName: 'Börgelsson' }
-];
 
 const getCurrentDate = () => {
 	
@@ -56,9 +46,7 @@ class Autocomplete extends Component {
 	}
 }
 
-const AddWorkingTimeForm = ({date, onNewWorkingTime}) => {
-
-	const workerNames = workers.map(worker => worker.firstName + ' ' + worker.lastName);
+const AddWorkingTimeForm = ({date, onNewWorkingTime, projects, workers}) => {
 	
 	let _worker, _project, _date, _hours, _description;
 
@@ -82,6 +70,7 @@ const AddWorkingTimeForm = ({date, onNewWorkingTime}) => {
 		
 	return (
 		<section>
+			<h3>Add new working time</h3>
 			<form className="add-form" onSubmit={submit}>
 				<label htmlFor="project-list">Project</label>
 				<Autocomplete id="project-list"
@@ -90,7 +79,7 @@ const AddWorkingTimeForm = ({date, onNewWorkingTime}) => {
 											ref={input => _project = input}/>
 				<label htmlFor="worker-list">Worker</label>
 				<Autocomplete id="worker-list"
-											options={workerNames}
+											options={workers}
 											required
 											ref={input => _worker = input}/>
 				

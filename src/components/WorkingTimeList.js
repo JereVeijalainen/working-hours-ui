@@ -2,63 +2,97 @@ import React, { Component } from 'react';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import WorkingTimeRow from './WorkingTimeRow';
 
+const FilterDropdown = ({title, selectedItem, itemList, isOpen, toggle, filterFunction}) => {
+
+	return (
+		<ButtonDropdown isOpen={isOpen} toggle={toggle} className="filter-dropdown">
+			<DropdownToggle caret>
+				{selectedItem ? selectedItem : title}
+			</DropdownToggle>
+			<DropdownMenu>
+			<DropdownItem key={0} onClick={() => filterFunction('All')}>All</DropdownItem>
+			{itemList.map((item, i) =>
+				<DropdownItem key={i + 1} onClick={() => filterFunction(item)}>{item}</DropdownItem>
+			)}
+			</DropdownMenu>
+		</ButtonDropdown>
+	);
+}
+
 class WorkingTimeList extends Component {
 	constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
+    this.toggleWorker = this.toggleWorker.bind(this);
+		this.toggleProject = this.toggleProject.bind(this);
+		
     this.state = {
-			dropdownOpen: false,
 			filteredWorkingTimes: this.props.workingTimes,
-			selectedWorker: ''
+			workerDropdownOpen: false,
+			projectDropdownOpen: false,
+			selectedWorker: '',			
+			selectedProject: ''
     };
   }
 
-  toggle() {
+  toggleWorker() {
     this.setState({
-      dropdownOpen: !this.state.dropdownOpen
+      workerDropdownOpen: !this.state.workerDropdownOpen
     });
 	}
-	
-	noWorkerFilter = () => {
-		this.setState({
-			filteredWorkingTimes: this.props.workingTimes,
-			selectedWorker: ''
-		}); 
+
+  toggleProject() {
+    this.setState({
+      projectDropdownOpen: !this.state.projectDropdownOpen
+    });
 	}
-	
+
 	filterByWorker = worker => {
-		const filteredRows = this.props.workingTimes.filter(time => time.worker === worker);
+		const filteredRows = worker && worker !== "All"  ? this.props.workingTimes.filter(time => time.worker === worker) : this.props.workingTimes;
 
 		this.setState({
 			filteredWorkingTimes: filteredRows,
-			selectedWorker: worker
+			selectedWorker: worker,
+			selectedProject: ''
 		}); 
 	}
 
+	filterByProject = project => {
+		const filteredRows = project && project !== "All" ? this.props.workingTimes.filter(time => time.project === project) : this.props.workingTimes;
+
+		this.setState({
+			filteredWorkingTimes: filteredRows,
+			selectedProject: project,
+			selectedWorker: ''
+		}); 
+	}
 	
 	sumWorkingHours = () => {
 		return this.state.filteredWorkingTimes.map(time => time.hours).reduce((accumulator, currentValue) => accumulator + currentValue);
 	}
 
 	render() {
-		const { workingTimes } = this.props;
+		const { workingTimes, projects, workers } = this.props;
 		const filteredWorkingTimes = this.state.filteredWorkingTimes;
+		const projectsInWorkingTimes = projects.filter(project => workingTimes.map(time => time.project).indexOf(project) > -1);
+		const workersInWorkingTimes = workers.filter(worker => workingTimes.map(time => time.worker).indexOf(worker) > -1);
 		
 		return (
 			<div>
-				<section>
-					<ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-						<DropdownToggle caret>
-							{this.state.selectedWorker ? this.state.selectedWorker : 'Worker'}
-						</DropdownToggle>
-						<DropdownMenu>
-						<DropdownItem key={0} onClick={() => this.noWorkerFilter()}>All</DropdownItem>
-						{workingTimes.map((data, i) =>
-							<DropdownItem key={i + 1} onClick={() => this.filterByWorker(data.worker)}>{data.worker}</DropdownItem>
-						)}
-						</DropdownMenu>
-					</ButtonDropdown>
+				<section>					
+					<FilterDropdown title="Worker"
+													selectedItem={this.state.selectedWorker}
+													itemList={workersInWorkingTimes}
+													isOpen={this.state.workerDropdownOpen}
+													toggle={this.toggleWorker}
+													filterFunction={this.filterByWorker} />
+
+					<FilterDropdown title="Project"
+													selectedItem={this.state.selectedProject}
+													itemList={projectsInWorkingTimes}
+													isOpen={this.state.projectDropdownOpen}
+													toggle={this.toggleProject}
+													filterFunction={this.filterByProject} />
 				</section>
 				<section>
 					<span>Total {this.sumWorkingHours()} hours</span>

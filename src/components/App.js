@@ -28,6 +28,19 @@ const workingTimes = [
 	}
 ];
 
+const projects = [
+	'Rio Working Hours',
+	'Test Project',
+	'Project X'
+];
+
+const workers = [
+	{ firstName: 'Jere', lastName: 'Veijalainen' },
+	{ firstName: 'Mikko', lastName: 'Mallikas' },
+	{ firstName: 'Maija', lastName: 'Meikäläinen' },
+	{ firstName: 'Börje', lastName: 'Börgelsson' }
+];
+
 class App extends Component {
 
 	state = {
@@ -40,12 +53,6 @@ class App extends Component {
 			allWorkingTimes: [...this.state.allWorkingTimes, newWorkingTime]
 		});
 	}
-
-	/*
-		IDEA: Parempi olisi filtteröidä suoraan listanäkymää ja näyttää sen yhteydessä yhteensä-tuntimäärä.
-		Tehdään oma filterWorkingHours-toiminto, jossa voisi filtteröidä usealla eri tavalla. Esim henkilön, projektin tai molempien mukaan. Tai kuukauden tai vuoden...
-		Se palauttaa arrayna ehtojen mukaiset rivit, joista voi sitten laskea tuntisumman.
-	*/
 	
 	// At the moment this is used only in summary component.
 	sumWorkingHours = (filterBy, filterItem) => {
@@ -59,6 +66,7 @@ class App extends Component {
 	
   render() {
 		const location = this.props.location;
+		const workerNames = workers.map(worker => worker.firstName + ' ' + worker.lastName);
 		
 		return (
       <div className="App">
@@ -67,9 +75,13 @@ class App extends Component {
 					<h1>Work Timer</h1>
         </header>
 				{	location.pathname === '/add' ?
-						<AddWorkingTimeForm onNewWorkingTime={this.addWorkingTime} />: 
+						<AddWorkingTimeForm onNewWorkingTime={this.addWorkingTime}
+																projects={projects}
+																workers={workerNames} />: 
 					location.pathname === '/list' ?
-						<WorkingTimeList workingTimes={this.state.allWorkingTimes} />:
+						<WorkingTimeList workingTimes={this.state.allWorkingTimes}
+														 projects={projects}
+														 workers={workerNames}  />:
 					location.pathname === '/summary' ?
 						<Summary total={this.sumWorkingHours('worker', 'Jere Veijalainen')} />:
 						// <Summary total={this.sumWorkingHours('project', 'Test Project')} />:
