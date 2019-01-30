@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const WorkingTimeRow = ({project, worker, date, hours, description}) => {
+const WorkingTimeRow = ({timeItem, onDeleteWorkingTime}) => {
+
+	const { project, worker, date, hours, description } = timeItem;
+
 	return (
 		<tr>
 			<td>{project}</td>
@@ -9,6 +12,7 @@ const WorkingTimeRow = ({project, worker, date, hours, description}) => {
 			<td>{date}</td>
 			<td>{hours}</td>
 			<td>{description}</td>
+			<td><button onClick={() => onDeleteWorkingTime(timeItem)}>Delete</button></td>
 		</tr>
 	)
 }

@@ -56,7 +56,7 @@ class WorkingTimeList extends Component {
   }
 
 	filterByWorker = worker => {
-		const filteredRows = worker && worker !== "All"  ? this.props.workingTimes.filter(time => time.worker === worker) : this.props.workingTimes;
+		const filteredRows = worker && worker !== "All"  ? this.props.workingTimes.filter(timeItem => timeItem.worker === worker) : this.props.workingTimes;
 
 		this.setState({
 			filteredWorkingTimes: filteredRows,
@@ -66,7 +66,7 @@ class WorkingTimeList extends Component {
 	}
 
 	filterByProject = project => {
-		const filteredRows = project && project !== "All" ? this.props.workingTimes.filter(time => time.project === project) : this.props.workingTimes;
+		const filteredRows = project && project !== "All" ? this.props.workingTimes.filter(timeItem => timeItem.project === project) : this.props.workingTimes;
 
 		this.setState({
 			filteredWorkingTimes: filteredRows,
@@ -76,14 +76,15 @@ class WorkingTimeList extends Component {
 	}
 	
 	sumWorkingHours = () => {
-		return this.state.filteredWorkingTimes.map(time => time.hours).reduce((accumulator, currentValue) => accumulator + currentValue);
+		return this.state.filteredWorkingTimes.length > 0 ? 
+			this.state.filteredWorkingTimes.map(timeItem => timeItem.hours).reduce((accumulator, currentValue) => accumulator + currentValue) : 0;
 	}
 
 	render() {
-		const { workingTimes, projects, workers } = this.props;
+		const { workingTimes, projects, workers, onDeleteWorkingTime } = this.props;
 		const filteredWorkingTimes = this.state.filteredWorkingTimes;
-		const projectsInWorkingTimes = projects.filter(project => workingTimes.map(time => time.project).indexOf(project) > -1);
-		const workersInWorkingTimes = workers.filter(worker => workingTimes.map(time => time.worker).indexOf(worker) > -1);
+		const projectsInWorkingTimes = projects.filter(project => workingTimes.map(timeItem => timeItem.project).indexOf(project) > -1);
+		const workersInWorkingTimes = workers.filter(worker => workingTimes.map(timeItem => timeItem.worker).indexOf(worker) > -1);
 		
 		return (
 			<div>
@@ -111,9 +112,11 @@ class WorkingTimeList extends Component {
 							</tr>
 						</thead>
 						<tbody>
-							{filteredWorkingTimes.map((data, i) =>
-								<WorkingTimeRow key={i} {...data} />
-							)}
+						{filteredWorkingTimes.map((timeItem, i) =>
+							<WorkingTimeRow key={i}
+															timeItem={timeItem}
+															onDeleteWorkingTime={onDeleteWorkingTime} />
+						)}
 						</tbody>
 					</table>
 				</section>
