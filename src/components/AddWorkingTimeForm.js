@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-
-
 const getCurrentDate = () => {
 	
 	const addLeadingZero = (number) => {
@@ -42,7 +40,7 @@ class Autocomplete extends Component {
 							<option key={i}>{opt}</option>)}
 					</datalist>
 			</div>
-		)
+		);
 	}
 }
 
