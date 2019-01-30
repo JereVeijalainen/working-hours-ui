@@ -3,7 +3,6 @@ import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reac
 import WorkingTimeRow from './WorkingTimeRow';
 
 /* TODO:
-	- Rivin poisto listalta
 	- Filttereiden toimiminen yhtäaikasesti
 	- Onko kaikki state-tasot järkevästi?
 */

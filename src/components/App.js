@@ -42,6 +42,11 @@ const workers = [
 	{ firstName: 'Börje', lastName: 'Börgelsson' }
 ];
 
+/* TODO:
+	- Testidatat omaan tiedostoonsa
+	- Miksi componentDidMount ei päivitä tilaa listaan?
+*/
+
 class App extends Component {
 
 	state = {
@@ -50,7 +55,8 @@ class App extends Component {
 	};
 
 	componentDidMount() {
-		// When fetching data from api it will be done here		
+		// When fetching data from api it will be done here
+		
 		this.setState({
 			allWorkingTimes: workingTimes,
 			filteredWorkingTimes: workingTimes
@@ -70,7 +76,7 @@ class App extends Component {
 																 filterBy === 'project' ? allWorkingTimes.filter(timeItem => timeItem.project === filterItem) :
 		allWorkingTimes;
 		const countedHours = filteredWorkingTimes.map(timeItem => timeItem.hours);
-		return countedHours.reduce((accumulator, currentValue) => accumulator + currentValue);
+		return countedHours.length > 0 ? countedHours.reduce((accumulator, currentValue) => accumulator + currentValue) : 0;
 	}
 
 	removeWorkingTime = timeItem => {		
