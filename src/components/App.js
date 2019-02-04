@@ -44,24 +44,23 @@ const workers = [
 
 /* TODO:
 	- Testidatat omaan tiedostoonsa
-	- Miksi componentDidMount ei päivitä tilaa listaan?
 */
 
 class App extends Component {
 
 	state = {
-		allWorkingTimes: [],
-		filteredWorkingTimes: []
+		allWorkingTimes: workingTimes,
+		filteredWorkingTimes: workingTimes
 	};
 
-	componentDidMount() {
-		// When fetching data from api it will be done here
-		
-		this.setState({
-			allWorkingTimes: workingTimes,
-			filteredWorkingTimes: workingTimes
-		});
-	}
+	// componentDidMount() {
+	// 	// When fetching data from api it will be done here
+				
+	// 	this.setState({
+	// 		allWorkingTimes: workingTimes,
+	// 		filteredWorkingTimes: workingTimes
+	// 	});
+	// }
 
 	addWorkingTime = newWorkingTime => {
 		this.setState({
