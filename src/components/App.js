@@ -3,6 +3,7 @@ import { FaBusinessTime } from 'react-icons/fa'
 import WorkingTimeList from './WorkingTimeList';
 import AddWorkingTimeForm from './AddWorkingTimeForm';
 import Summary from './Summary';
+import Home from './Home';
 import { remove } from '../utils/array';
 
 const workingTimes = [
@@ -108,7 +109,7 @@ class App extends Component {
 														 onDeleteWorkingTime={this.removeWorkingTime} />:
 					location.pathname === '/summary' ?
 						<Summary total={this.sumWorkingHours('worker', 'Jere Veijalainen')} />:
-					null					
+          <Home />
 				}
       </div>
     );
