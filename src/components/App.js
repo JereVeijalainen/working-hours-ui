@@ -63,11 +63,11 @@ class App extends Component {
   //   });
   // }
 
-addWorkingTime = newWorkingTime => {
-  this.setState({
-    allWorkingTimes: [...this.state.allWorkingTimes, newWorkingTime]
-  });
-}
+  addWorkingTime = newWorkingTime => {
+    this.setState({
+      allWorkingTimes: [...this.state.allWorkingTimes, newWorkingTime]
+    });
+  }
 	
   // At the moment this is used only in summary component.
   sumWorkingHours = (filterBy, filterItem) => {
