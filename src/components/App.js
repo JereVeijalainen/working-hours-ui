@@ -7,110 +7,110 @@ import Home from './Home';
 import { remove } from '../utils/array';
 
 const workingTimes = [
-	{
-		project: 'Rio Working Hours',
-		worker: 'Jere Veijalainen',
-		date: '2019-01-01',
-		hours: 7.5,
-		description: 'Planning and stuff...'
-	},
-	{
-		project: 'Rio Working Hours',
-		worker: 'Mikko Mallikas',
-		date: '2019-01-02',
-		hours: 8,
-		description: 'Designing the UI'
-	},
-	{
-		project: 'Test Project',
-		worker: 'Börje Börgelsson',
-		date: '2019-01-24',
-		hours: 6,
-		description: 'Coding UI'
-	}
+  {
+    project: 'Rio Working Hours',
+    worker: 'Jere Veijalainen',
+    date: '2019-01-01',
+    hours: 7.5,
+    description: 'Planning and stuff...'
+  },
+  {
+    project: 'Rio Working Hours',
+    worker: 'Mikko Mallikas',
+    date: '2019-01-02',
+    hours: 8,
+    description: 'Designing the UI'
+  },
+  {
+    project: 'Test Project',
+    worker: 'Börje Börgelsson',
+    date: '2019-01-24',
+    hours: 6,
+    description: 'Coding UI'
+  }
 ];
 
 const projects = [
-	'Rio Working Hours',
-	'Test Project',
-	'Project X'
+  'Rio Working Hours',
+  'Test Project',
+  'Project X'
 ];
 
 const workers = [
-	{ firstName: 'Jere', lastName: 'Veijalainen' },
-	{ firstName: 'Mikko', lastName: 'Mallikas' },
-	{ firstName: 'Maija', lastName: 'Meikäläinen' },
-	{ firstName: 'Börje', lastName: 'Börgelsson' }
+  { firstName: 'Jere', lastName: 'Veijalainen' },
+  { firstName: 'Mikko', lastName: 'Mallikas' },
+  { firstName: 'Maija', lastName: 'Meikäläinen' },
+  { firstName: 'Börje', lastName: 'Börgelsson' }
 ];
 
 /* TODO:
-	- Testidatat omaan tiedostoonsa
+  - Testidatat omaan tiedostoonsa
 */
 
 class App extends Component {
 
-	state = {
-		allWorkingTimes: workingTimes,
-		filteredWorkingTimes: workingTimes
-	};
+  state = {
+    allWorkingTimes: workingTimes,
+    filteredWorkingTimes: workingTimes
+  };
 
-	// componentDidMount() {
-	// 	// When fetching data from api it will be done here
-				
-	// 	this.setState({
-	// 		allWorkingTimes: workingTimes,
-	// 		filteredWorkingTimes: workingTimes
-	// 	});
-	// }
+  // componentDidMount() {
+  //   // When fetching data from api it will be done here
 
-	addWorkingTime = newWorkingTime => {
-		this.setState({
-			allWorkingTimes: [...this.state.allWorkingTimes, newWorkingTime]
-		});
-	}
+  //   this.setState({
+  //     allWorkingTimes: workingTimes,
+  //     filteredWorkingTimes: workingTimes
+  //   });
+  // }
+
+addWorkingTime = newWorkingTime => {
+  this.setState({
+    allWorkingTimes: [...this.state.allWorkingTimes, newWorkingTime]
+  });
+}
 	
-	// At the moment this is used only in summary component.
-	sumWorkingHours = (filterBy, filterItem) => {
-		const allWorkingTimes = this.state.allWorkingTimes;
-		const filteredWorkingTimes = filterBy === 'worker' ? allWorkingTimes.filter(timeItem => timeItem.worker === filterItem) :
-																 filterBy === 'project' ? allWorkingTimes.filter(timeItem => timeItem.project === filterItem) :
-		allWorkingTimes;
-		const countedHours = filteredWorkingTimes.map(timeItem => timeItem.hours);
-		return countedHours.length > 0 ? countedHours.reduce((accumulator, currentValue) => accumulator + currentValue) : 0;
-	}
+  // At the moment this is used only in summary component.
+  sumWorkingHours = (filterBy, filterItem) => {
+    const allWorkingTimes = this.state.allWorkingTimes;
+    const filteredWorkingTimes = filterBy === 'worker' ? allWorkingTimes.filter(timeItem => timeItem.worker === filterItem) :
+                                 filterBy === 'project' ? allWorkingTimes.filter(timeItem => timeItem.project === filterItem) :
+                                 allWorkingTimes;
+    const countedHours = filteredWorkingTimes.map(timeItem => timeItem.hours);
+    return countedHours.length > 0 ? countedHours.reduce((accumulator, currentValue) => accumulator + currentValue) : 0;
+  }
 
-	removeWorkingTime = timeItem => {		
-		var timeItemList = this.state.allWorkingTimes;
-		remove(timeItemList, timeItem);
+  removeWorkingTime = timeItem => {		
+    var timeItemList = this.state.allWorkingTimes;
+    remove(timeItemList, timeItem);
 
-		this.setState({
-			allWorkingTimes: timeItemList
-		});
-	}
+    this.setState({
+      allWorkingTimes: timeItemList
+    });
+  }
 	
   render() {
-		const location = this.props.location;
-		const workerNames = workers.map(worker => worker.firstName + ' ' + worker.lastName);
-		
-		return (
+    const location = this.props.location;
+    const workerNames = workers.map(worker => worker.firstName + ' ' + worker.lastName);
+    
+    return (
       <div className="App">
         <header>
           <FaBusinessTime size={50} />
-					<h1>Work Timer</h1>
+          <h1>Work Timer</h1>
         </header>
-				{	location.pathname === '/add' ?
-						<AddWorkingTimeForm onNewWorkingTime={this.addWorkingTime}
-																projects={projects}
-																workers={workerNames} />: 
-					location.pathname === '/list' ?
-						<WorkingTimeList workingTimes={this.state.allWorkingTimes}
-														 projects={projects}
-														 workers={workerNames}
-														 onDeleteWorkingTime={this.removeWorkingTime} />:
-					location.pathname === '/summary' ?
-						<Summary total={this.sumWorkingHours('worker', 'Jere Veijalainen')} />:
+        {	location.pathname === '/add' ?
+            <AddWorkingTimeForm onNewWorkingTime={this.addWorkingTime}
+                                projects={projects}
+                                workers={workerNames} />: 
+          location.pathname === '/list' ?
+            <WorkingTimeList workingTimes={this.state.allWorkingTimes}
+                             projects={projects}
+                             workers={workerNames}
+                             onDeleteWorkingTime={this.removeWorkingTime} />:
+          location.pathname === '/summary' ?
+            <Summary total={this.sumWorkingHours('worker', 'Jere Veijalainen')} />:
           <Home />
-				}
+        }
       </div>
     );
   }
