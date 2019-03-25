@@ -3,8 +3,10 @@ import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reac
 import WorkingTimeRow from './WorkingTimeRow';
 
 /* TODO:
-	- Filttereiden toimiminen yhtäaikasesti
-	- Onko kaikki state-tasot järkevästi?
+  - Filttereiden toimiminen yhtäaikasesti
+  - Onko kaikki state-tasot järkevästi?
+  BUGFIX:
+    - Delete ei päivitä listaa jos filtteri on valittu. Deletoitu tieto jää tällöin näkyviin.
 */
 
 class FilterDropdown extends Component {
