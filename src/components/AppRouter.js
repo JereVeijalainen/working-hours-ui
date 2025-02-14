@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import App from './App';
 
 const AppRouter = () => {
@@ -12,10 +12,15 @@ const AppRouter = () => {
           <Link to="/list">Working time list</Link>
           <Link to="/summary">Summary</Link>
         </nav>
-        <Route path="/" component={App} />
+        <Routes>
+          <Route exact path="/" element={<App />} />
+          <Route path="/add" element={<App />} />
+          <Route path="/list" element={<App />} />
+          <Route path="/summary" element={<App />} />
+        </Routes>
       </div>
     </Router>
   );
 }
 
-export default AppRouter
+export default AppRouter;
