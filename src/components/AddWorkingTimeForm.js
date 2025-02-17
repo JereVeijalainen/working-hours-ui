@@ -44,7 +44,7 @@ class Autocomplete extends Component {
   }
 }
 
-const AddWorkingTimeForm = ({date, onNewWorkingTime, projects, workers}) => {
+const AddWorkingTimeForm = ({date = getCurrentDate(), onNewWorkingTime, projects, workers}) => {
 	
   let _worker, _project, _date, _hours, _description;
 
@@ -110,10 +110,6 @@ const AddWorkingTimeForm = ({date, onNewWorkingTime, projects, workers}) => {
       </form>
     </section>
   );
-}
-
-AddWorkingTimeForm.defaultProps = {
-  date: getCurrentDate()
 }
 
 export default AddWorkingTimeForm;
