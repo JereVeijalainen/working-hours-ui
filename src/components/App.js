@@ -49,7 +49,7 @@ class App extends Component {
   }
 	
   render() {
-    const location = this.props.location;
+    const pathname = window.location.pathname;
     const workerNames = workers.map(worker => worker.firstName + ' ' + worker.lastName);
     
     return (
@@ -58,16 +58,16 @@ class App extends Component {
           <FaBusinessTime size={50} />
           <h1>Work Timer</h1>
         </header>
-        {	location.pathname === '/add' ?
+        { pathname === '/add' ?
             <AddWorkingTimeForm onNewWorkingTime={this.addWorkingTime}
                                 projects={projects}
                                 workers={workerNames} />: 
-          location.pathname === '/list' ?
+          pathname === '/list' ?
             <WorkingTimeList workingTimes={this.state.allWorkingTimes}
                              projects={projects}
                              workers={workerNames}
                              onDeleteWorkingTime={this.removeWorkingTime} />:
-          location.pathname === '/summary' ?
+          pathname === '/summary' ?
             <Summary total={this.sumWorkingHours('worker', 'Jere Veijalainen')} />:
           <Home />
         }
