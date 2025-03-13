@@ -10,18 +10,38 @@ import { workingTimes, projects, workers } from '../data/testData';
 class App extends Component {
 
   state = {
-    allWorkingTimes: workingTimes,
-    filteredWorkingTimes: workingTimes
+    allWorkingTimes: [],
+    filteredWorkingTimes: []
   };
+  
+  // TODO: Fix this to work with useEffect
+  // Muuta komponentit funktioiksi: https://react.dev/reference/react/Component#alternatives
+  componentDidMount() {
+    // When fetching data from api it will be done here
 
-  // componentDidMount() {
-  //   // When fetching data from api it will be done here
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/workTimeRecord/all');
 
-  //   this.setState({
-  //     allWorkingTimes: workingTimes,
-  //     filteredWorkingTimes: workingTimes
-  //   });
-  // }
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        this.setState({
+          allWorkingTimes: result.data,
+          filteredWorkingTimes: result.data
+        });
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        // TODO: Add error handling
+      }
+    };
+
+    fetchData();
+  }
 
   addWorkingTime = newWorkingTime => {
     this.setState({
