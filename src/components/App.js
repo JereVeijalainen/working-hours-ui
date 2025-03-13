@@ -12,7 +12,7 @@ const App = () => {
   const [allWorkingTimes, setAllWorkingTimes] = useState(workingTimes);
   const [filteredWorkingTimes, setAllFilteredWorkingTimes] = useState(workingTimes); // TURHA?
   
-    useEffect(() => {
+  useEffect(() => {
 
     const fetchData = async () => {
       try {
