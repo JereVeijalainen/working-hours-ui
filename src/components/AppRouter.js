@@ -11,6 +11,7 @@ const AppRouter = () => {
           <Link to="/add">Add working time</Link>
           <Link to="/list">Working time list</Link>
           <Link to="/summary">Summary</Link>
+          <Link to="/api">Api Example</Link> {/* TODO: Poista kun ei enää tarpeen. */}
         </nav>
         <Route path="/" component={App} />
       </div>
