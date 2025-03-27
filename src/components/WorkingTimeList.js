@@ -7,6 +7,8 @@ import WorkingTimeRow from './WorkingTimeRow';
   - Onko kaikki state-tasot järkevästi?
   BUGFIX:
     - Delete ei päivitä listaa jos filtteri on valittu. Deletoitu tieto jää tällöin näkyviin.
+
+  - Muuta komponentit funktioiksi: https://react.dev/reference/react/Component#alternatives
 */
 
 class FilterDropdown extends Component {
